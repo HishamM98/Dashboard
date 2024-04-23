@@ -1,0 +1,15 @@
+<div class="list-container">
+    @for (user of users(); track user.id) {
+    <mat-card appearance="raised" [routerLink]="'user/'+user.id" routerLinkActive="active">
+        <mat-card-header>
+            <mat-card-title>{{user.first_name}} {{user.last_name}}</mat-card-title>
+        </mat-card-header>
+        <img class="user-avatar" mat-card-image [src]="user.avatar" alt="User Avatar">
+    </mat-card>
+    }
+    @empty {
+    <app-loader></app-loader>
+    }
+</div>
+<mat-paginator class="paginator" (page)="getUsers($event.pageIndex)" [length]="response?.total"
+    [pageSize]="response?.per_page" aria-label="Select page of users"></mat-paginator>

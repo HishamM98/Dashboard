@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+    <div style="display: flex; align-items: center; cursor: default;">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard App</span>
+    </div>
+    <form class="example-form">
+        <mat-form-field class="example-full-width">
+            <mat-label>Enter Id. Ex: 1</mat-label>
+            <input type="number" placeholder="Id" aria-label="Number" matInput [formControl]="myControl"
+                [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                @for (option of filteredOptions | async; track option.id) {
+                <mat-option [value]="option.id" [routerLink]="'user/' + option.id">{{option.first_name}}
+                    {{option.last_name}}</mat-option>
+                }
+                @empty {
+                @if (myControl.dirty) {
+                <mat-option>No such user!</mat-option>
+                }
+                }
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+</mat-toolbar>
